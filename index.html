@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Experiência de Tiro Esportivo | NR Consultoria</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body {
+      background: #0d0d0d;
+      color: white;
+      overflow-x: hidden;
+    }
+
+    .hero {
+      min-height: 100vh;
+
+      background:
+        linear-gradient(rgba(0, 0, 0, .75), rgba(0, 0, 0, .88)),
+        url('https://images.unsplash.com/photo-1544717305-2782549b5136?q=80&w=1600&auto=format&fit=crop');
+
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 30px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 720px;
+
+      background: rgba(12, 12, 12, .92);
+
+      border: 1px solid rgba(255, 255, 255, .08);
+
+      border-radius: 24px;
+
+      padding: 40px;
+
+      backdrop-filter: blur(10px);
+
+      box-shadow: 0 0 45px rgba(0, 0, 0, .5);
+    }
+
+    .top-button {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 25px;
+    }
+
+    .depoimento-texto {
+      text-align: center;
+      font-size: 18px;
+      font-weight: bold;
+      color: #fff;
+      margin-bottom: 15px;
+      line-height: 1.5;
+    }
+
+    .depoimento-btn {
+      background: #c59b2a;
+      color: #111;
+      border: none;
+      padding: 14px 22px;
+      border-radius: 999px;
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: .2s;
+    }
+
+    .depoimento-btn:hover {
+      transform: scale(1.03);
+      opacity: .95;
+    }
+
+    .badge {
+      display: inline-block;
+      background: #c59b2a;
+      color: #111;
+      padding: 10px 18px;
+      border-radius: 999px;
+      font-weight: bold;
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      font-size: 42px;
+      line-height: 1.1;
+      margin-bottom: 18px;
+    }
+
+    h1 span {
+      color: #c59b2a;
+    }
+
+    .subtitle {
+      color: #d1d1d1;
+      line-height: 1.6;
+      font-size: 18px;
+      margin-bottom: 32px;
+    }
+
+    .benefits {
+      margin-bottom: 32px;
+    }
+
+    .benefit {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+      font-size: 17px;
+    }
+
+    .benefit span {
+      color: #c59b2a;
+      margin-right: 12px;
+      font-size: 20px;
+    }
+
+    .price-box {
+      background: #181818;
+      border: 1px solid rgba(255, 255, 255, .06);
+      border-radius: 18px;
+      padding: 24px;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .price-old {
+      color: #777;
+      text-decoration: line-through;
+      margin-bottom: 8px;
+    }
+
+    .price {
+      font-size: 52px;
+      color: #c59b2a;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .price-desc {
+      color: #bdbdbd;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    input {
+      background: #222;
+      border: none;
+      padding: 16px;
+      border-radius: 14px;
+      color: white;
+      font-size: 16px;
+      outline: none;
+      border: 1px solid transparent;
+      transition: .2s;
+    }
+
+    input:focus {
+      border-color: #c59b2a;
+    }
+
+    button[type="submit"] {
+      background: #c59b2a;
+      color: #111;
+      border: none;
+      padding: 18px;
+      border-radius: 14px;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: .2s;
+    }
+
+    button[type="submit"]:hover {
+      transform: scale(1.02);
+    }
+
+    .warning {
+      margin-top: 18px;
+      color: #aaa;
+      font-size: 14px;
+      text-align: center;
+      line-height: 1.5;
+    }
+
+    .footer {
+      margin-top: 30px;
+      text-align: center;
+      color: #666;
+      font-size: 13px;
+    }
+
+    /* POPUP VIDEO */
+
+    .popup {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, .85);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      padding: 20px;
+    }
+
+    .popup-content {
+      width: 100%;
+      max-width: 850px;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    .depoimento-btn {
+      background: #c59b2a;
+      color: #111;
+      border: none;
+      padding: 14px 22px;
+      border-radius: 999px;
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: .2s;
+
+      animation: pulse 1.5s infinite;
+      box-shadow: 0 0 0 rgba(197, 155, 42, .7);
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(197, 155, 42, .7);
+      }
+
+      70% {
+        transform: scale(1.05);
+        box-shadow: 0 0 0 20px rgba(197, 155, 42, 0);
+      }
+
+      100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(197, 155, 42, 0);
+      }
+    }
+
+    .close-popup {
+      position: absolute;
+      top: 12px;
+      right: 15px;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      border: none;
+      background: #c59b2a;
+      color: #111;
+      font-size: 20px;
+      font-weight: bold;
+      cursor: pointer;
+      z-index: 2;
+    }
+
+    .video-cta {
+      padding: 25px;
+      text-align: center;
+      background: #111;
+    }
+
+    .video-whatsapp-btn {
+      display: inline-block;
+      width: 100%;
+      max-width: 450px;
+
+      background: #25D366;
+      color: white;
+      text-decoration: none;
+
+      padding: 18px;
+      border-radius: 12px;
+
+      font-size: 18px;
+      font-weight: bold;
+
+      transition: .3s;
+
+      animation: pulseWhatsapp 1.8s infinite;
+    }
+
+    .video-whatsapp-btn:hover {
+      transform: scale(1.03);
+    }
+
+    @keyframes pulseWhatsapp {
+
+      0% {
+        box-shadow: 0 0 0 0 rgba(37, 211, 102, .7);
+      }
+
+      70% {
+        box-shadow: 0 0 0 18px rgba(37, 211, 102, 0);
+      }
+
+      100% {
+        box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+      }
+
+    }
+
+    .video-cta {
+      padding: 25px;
+      text-align: center;
+      background: #111;
+    }
+
+    .video-whatsapp-btn {
+      display: inline-block;
+      width: 100%;
+      max-width: 450px;
+      background: #25D366;
+      color: white;
+      text-decoration: none;
+      padding: 18px;
+      border-radius: 12px;
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .video-wrapper {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+    }
+
+    .video-wrapper iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    @media(max-width:768px) {
+
+      .container {
+        padding: 28px;
+      }
+
+      h1 {
+        font-size: 32px;
+      }
+
+      .subtitle {
+        font-size: 16px;
+      }
+
+      .price {
+        font-size: 42px;
+      }
+
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- POPUP VIDEO -->
+
+  <div class="popup" id="popup">
+
+    <div class="popup-content">
+
+      <button class="close-popup" id="closePopup">
+        ×
+      </button>
+
+      <div class="video-wrapper">
+
+        <video controls width="100%" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;">
+          <source src="src/1.mp4" type="video/mp4">
+          Seu navegador não suporta vídeo.
+        </video>
+
+      </div>
+
+      <div class="video-cta">
+
+        <a href="https://wa.me/5592984127821?text=Olá,%20quero%20agendar%20minha%20primeira%20experiência,%20como%20faço?"
+          target="_blank" class="video-whatsapp-btn">
+          🔥 QUERO VIVER ESSA EXPERIÊNCIA
+        </a>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- HERO -->
+
+  <section class="hero">
+
+    <div class="container">
+
+      <h1>
+        Descubra a emoção de dar seu primeiro disparo <span>com acompanhamento profissional</span>
+      </h1>
+
+      <p class="subtitle">
+        Sempre teve curiosidade de conhecer o tiro esportivo? Viva uma experiência segura, emocionante e acompanhada por
+        instrutor especializado, mesmo que você nunca tenha tocado em uma arma de fogo.
+      </p>
+
+
+      <div class="benefits">
+
+        <div class="benefit">
+          <span>✔</span>
+          Ideal para quem nunca atirou ou teve contato com arma de fogo
+        </div>
+
+        <div class="benefit">
+          <span>✔</span>
+          Acompanhamento com instrutor especializado
+        </div>
+
+        <div class="benefit">
+          <span>✔</span>
+          Equipamentos inclusos para uma experiência completa
+        </div>
+
+        <div class="benefit">
+          <span>✔</span>
+          Ambiente seguro e controlado
+        </div>
+
+        <div class="benefit">
+          <span>✔</span>
+          Experiência prática exclusiva
+        </div>
+
+      </div>
+
+      <div class="price-box">
+
+        <div class="price-old">
+          De R$ 497,00
+        </div>
+        <div class="price-new">
+          SOMENTE HOJE POR APENAS...
+        </div>
+
+        <div class="price">
+          R$ 350
+        </div>
+
+        <div class="price-desc">
+          As vagas são limitadas para garantir acompanhamento individual.
+        </div>
+
+      </div>
+
+      <p class="depoimento-texto">
+        ⚠️ Antes de agendar, veja o que quem já participou tem a dizer sobre a experiência!
+      </p>
+
+      <div class="top-button">
+        <button class="depoimento-btn" id="openPopup">
+          ▶ Ainda está em dúvida? Veja o que quem já participou tem a dizer sobre a experiência.
+        </button>
+      </div>
+
+
+      <div class="video-cta">
+
+        <a href="https://wa.me/5592984127821?text=Olá,%20quero%20agendar%20minha%20primeira%20experiência,%20como%20faço?"
+          target="_blank" class="video-whatsapp-btn">
+          📲 QUERO AGENDAR PELO WHATSAPP
+        </a>
+
+      </div>
+
+      <div class="footer">
+        NR Consultoria 2024 © Todos os direitos reservados
+      </div>
+
+    </div>
+
+  </section>
+
+  <script>
+
+    const popup = document.getElementById('popup');
+    const openPopup = document.getElementById('openPopup');
+    const closePopup = document.getElementById('closePopup');
+
+    openPopup.addEventListener('click', () => {
+      popup.style.display = 'flex';
+    });
+
+    closePopup.addEventListener('click', () => {
+      popup.style.display = 'none';
+    });
+
+    // FORMULARIO
+
+    const form = document.getElementById('leadForm');
+
+    form.addEventListener('submit', function (e) {
+
+      e.preventDefault();
+
+      const nome = document.getElementById('nome').value;
+      const telefone = document.getElementById('telefone').value;
+      const email = document.getElementById('email').value;
+
+      const mensagem = `
+NOVO LEAD - EXPERIÊNCIA DE TIRO
+
+Nome: ${nome}
+Telefone: ${telefone}
+Email: ${email}
+      `;
+
+      const numeroWhatsapp = '5592984127821';
+
+      const url = `https://wa.me/${numeroWhatsapp}?text=${encodeURIComponent(mensagem)}`;
+
+      window.location.href = url;
+
+    });
+
+  </script>
+
+</body>
+
+</html>
