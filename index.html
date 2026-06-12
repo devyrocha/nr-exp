@@ -566,6 +566,11 @@ Email: ${email}
 
       const url = `https://wa.me/${numeroWhatsapp}?text=${encodeURIComponent(mensagem)}`;
 
+      gtag('event', 'clique_whatsapp', {
+        event_category: 'Conversao',
+        event_label: 'Experiencia de Tiro'
+      });
+
       window.location.href = url;
 
     });
